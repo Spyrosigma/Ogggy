@@ -16,14 +16,14 @@
                 'user_email': '1234',
                 'Hiscore': 'Rohan',
             };
-
+            
             try {
-                const response = await fetch('https://dull-teal-dove-tutu.cyclic.app/store_data', {
-                // const response = await fetch('http://127.0.0.1:5000/store_data', {
+                // const response = await fetch('https://dull-teal-dove-tutu.cyclic.app/store_data', {
+                const response = await fetch('http://127.0.0.1:5000/store_data', {
                     method: 'POST',
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify(data),
-                    // mode: 'no-cors',
+                    mode: 'cors',
                 });
 
                 if (!response.ok) {

@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-CORS(app, resources={r"/store_data": {"origins": "*"}})
-# CORS(app)
+cors = CORS(app)
+app.config['CORS_HEADERS'] = 'Content-Type'
 
 DATA_FILE = 'data.csv'
 @app.route('/store_data', methods=['POST'])
@@ -13,7 +13,7 @@ def store_data():
         if request.is_json:
             data = request.get_json()
             if not ('user_email' in data and 'Hiscore' in data):
-                return jsonify({'error': 'Missing required keys: username, highScore'}), 400
+                return jsonify({'error': 'Missing required keys: user_email, Hiscore'}), 400
 
             username = data['user_email']
             high_score = data['Hiscore']
@@ -27,6 +27,10 @@ def store_data():
     except Exception as e:
         print(f"Error storing data: {e}")
         return jsonify({'error': 'An error occurred while storing data'}), 500
+    
+@app.route('/')
+def index():
+    return ('<h1> GFG is &hearts; </h1>')
 
 if __name__ == '__main__':
     app.run(debug=False)  
