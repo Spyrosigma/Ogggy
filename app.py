@@ -2,8 +2,8 @@ from flask import Flask, request, jsonify
 from flask_cors import CORS, cross_origin
 
 app = Flask(__name__)
-# CORS(app, resources={r"/store_data": {"origins": "*"}})
-CORS(app)
+CORS(app, resources={r"/store_data": {"origins": "*"}})
+# CORS(app)
 
 DATA_FILE = 'data.csv'
 @app.route('/store_data', methods=['POST'])
