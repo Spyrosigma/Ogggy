@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebGL Data Collection</title>
+</head>
+<body>
+    <h1>Collect and Send Data</h1>
+    <button id="send-data">Send Data</button>
+    <script>
+        const sendDataButton = document.getElementById('send-data');
+
+        sendDataButton.addEventListener('click', async () => {
+            const data = {
+                'user_email': '1234',
+                'Hiscore': 'Rohan',
+            };
+
+            try {
+                const response = await fetch('http://127.0.0.1:5000/store_data', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(data)
+                });
+
+                if (!response.ok) {
+                    throw new Error(`Error sending data: ${response.status}`);
+                }
+
+                const responseData = await response.json();
+                console.log(responseData.message);  
+            } catch (error) {
+                console.error('Error:', error.message); 
+            }
+        });
+    </script>
+</body>
+</html>
