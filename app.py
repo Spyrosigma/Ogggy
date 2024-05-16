@@ -6,15 +6,15 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 DATA_FILE = 'data.csv'
-@app.route('/store_data', methods=['POST'])
 @cross_origin()
+@app.route('/store_data', methods=['POST'])
 def store_data():
     try:
         if request.is_json:
             data = request.get_json()
             if not ('user_email' in data and 'Hiscore' in data):
                 return jsonify({'error': 'Missing required keys: user_email, Hiscore'}), 400
-
+                
             username = data['user_email']
             high_score = data['Hiscore']
             
