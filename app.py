@@ -6,8 +6,8 @@ cors = CORS(app)
 app.config['CORS_HEADERS'] = 'Content-Type'
 
 DATA_FILE = 'data.csv'
-@cross_origin()
 @app.route('/store_data', methods=['POST'])
+@cross_origin()
 def store_data():
     try:
         if request.is_json:
